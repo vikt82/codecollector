@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/vikt82/codecollector#readme",
   "devDependencies": {
+    "autoprefixer": "^9.4.7",
+    "cssnano": "^4.1.8",
     "gulp": "^4.0.0",
-    "gulp-postcss": "^8.0.0"
+    "gulp-postcss": "^8.0.0",
+    "gulp-sourcemaps": "^2.6.4"
   }
 }

@@ -2,10 +2,14 @@
 
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 
 var paths = {
   styles: {
-    src: 'src/scss/**/*.css',
+    src: 'src/scss/style.css',
+    watch: ['src/scss/**/*.css'],
     dest: 'dist/assets/css'
   }
   // scripts: {
@@ -14,23 +18,19 @@ var paths = {
   // }
 };
 
-gulp.task('style', function() {
-  var proccessors = [
-    
-  ];
+gulp.task('styles', function() {
+  var plugins = [
+      autoprefixer({browsers: "last 5 versions"}),
+      cssnano()
+    ];
 
   return gulp.src(paths.styles.src)
-    .pipe(postcss( proccessors))
+    .pipe( sourcemaps.init() )
+    .pipe(postcss( plugins ))
+    .pipe( sourcemaps.write('.') )
     .pipe(gulp.dest(paths.styles.dest));
 });
 
+gulp.watch(paths.styles.src, gulp.series('styles'));
 
-// gulp.task('default', function() {
-//   gulp.watch(paths.styles.src, ['style']);
-// });
-
-// function watch() {
-//   gulp.watch(paths.styles.src, style);
-// }
-
-// gulp.task('default', ['watch']);
+gulp.task('dev', gulp.series('styles'));
