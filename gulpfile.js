@@ -53,7 +53,7 @@ gulp.task('styles', function() {
       // cssnext(),
       mqpacker(),
       zindex(),
-      // cssnano()
+      cssnano()
     ];
 
   return gulp.src(paths.styles.src)
