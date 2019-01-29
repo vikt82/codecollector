@@ -1,0 +1,10 @@
+:root {
+  --bg: red;
+}
+
+body {
+  background-color: #f00;
+  background-color: var(--bg);
+}
+
+@import '_one';

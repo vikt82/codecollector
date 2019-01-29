@@ -19,9 +19,20 @@
   "homepage": "https://github.com/vikt82/codecollector#readme",
   "devDependencies": {
     "autoprefixer": "^9.4.7",
+    "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.8",
     "gulp": "^4.0.0",
     "gulp-postcss": "^8.0.0",
-    "gulp-sourcemaps": "^2.6.4"
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "lost": "^8.3.0",
+    "node-sass": "^4.11.0",
+    "postcss": "^7.0.14",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-normalize": "^7.0.1",
+    "postcss-pr": "^1.1.0",
+    "postcss-pxtorem": "^4.0.1",
+    "postcss-zindex": "^4.0.1",
+    "rucksack-css": "^1.0.2"
   }
 }

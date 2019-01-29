@@ -1,0 +1,35 @@
+
+
+$h1-small: 20pr
+$h1-big: 36pr
+  
+body
+  font-size: 10pr
+  margin: 0 auto
+  padding: 0 10pr
+
+  @media (max-width: 1280px)
+    background-color: #ff0000
+
+h1
+  font-size: $h1-small 
+  font-size: responsive $h1-small $h1-big
+  z-index: 100
+  @media (max-width: 1280px)
+    background-color: #ff0000
+h2
+  font-size: 18px 
+  font-size: responsive 20pr 36pr
+  z-index: 3333
+h3
+  font-size: 16px 
+  font-size: responsive 20pr 36pr
+  z-index: 99999
+h4
+  font-size: 14px 
+  font-size: responsive 20pr 36pr
+  font-weight: bold
+  @media (max-width: 1280px)
+    background-color: #ff0000
+    opacity: 0.3
+  
