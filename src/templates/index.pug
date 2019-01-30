@@ -10,29 +10,8 @@ html(lang="en")
 
 
   section
-    .container
-      h1 Photo Gallery
-      .photo-container
-        .photo-item
-          img.photo-item__image(src="https://images.unsplash.com/photo-1548761208-b7896a6ff225?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", alt="")
-          .photo-description
-            h3.photo-description__title Апартаменты от 7,2 млн ₽
-            p.photo-description__description Престижные апартаменты Матч Поинт на Кутузовском в шаге от Парка Победы и Филевского парка
-
-        .photo__item
-          img.photo-item__image(src="https://images.unsplash.com/photo-1548707519-313edf1b79bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", alt="")
-          .photo-description
-            h3.photo-description__title Апартаменты от 7,2 млн ₽
-            p.photo-description__description Престижные апартаменты Матч Поинт на Кутузовском в шаге от Парка Победы и Филевского парка
-
-        .photo__item
-          img.photo-item__image(src="https://images.unsplash.com/photo-1548765425-27618e8854fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", alt="")
-          .photo-description
-            h3.photo-description__title Апартаменты от 7,2 млн ₽
-            p.photo-description__description Престижные апартаменты Матч Поинт на Кутузовском в шаге от Парка Победы и Филевского парка
-
-        .photo__item
-          img.photo-item__image(src="https://images.unsplash.com/photo-1548737955-7791aea39240?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", alt="")
-          .photo-description
-            h3.photo-description__title Апартаменты от 7,2 млн ₽
-            p.photo-description__description Престижные апартаменты Матч Поинт на Кутузовском в шаге от Парка Победы и Филевского парка
+    ul.grid-container
+      each val in posts
+        li.grid-item
+          h3 #{val.title} 
+          p #{val.body}

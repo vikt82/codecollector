@@ -1,6 +1,7 @@
 "use strict";
 
 var gulp = require('gulp');
+
 var sass = require('gulp-sass');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
@@ -15,8 +16,12 @@ var pr = require('postcss-pr');
 var postcssNormalize = require('postcss-normalize');
 var zindex = require('postcss-zindex');
 
+var fs = require('fs');
+var data = require('gulp-data');
+var plumber = require('gulp-plumber');
+
 var pug = require('gulp-pug');
-// var data = require('gulp-data');
+
 
 sass.compiler = require('node-sass');
 
@@ -67,6 +72,7 @@ gulp.task('styles', function() {
     ];
 
   return gulp.src(paths.styles.src)
+    .pipe(plumber())
     .pipe( sourcemaps.init() )
     .pipe(sass({outputStyle: 'expanded'}))
     .pipe(postcss( plugins ))
@@ -78,6 +84,12 @@ gulp.task('styles', function() {
 
 gulp.task('templates', function() {
   return gulp.src(paths.templates.src)
+    .pipe(plumber())
+
+    .pipe(data(function() {
+      return JSON.parse(fs.readFileSync('./src/templates/data/data.json'));
+    }))
+    
     .pipe(pug({
       pretty: true
     }))

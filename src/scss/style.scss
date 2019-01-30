@@ -1,64 +1,39 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 // font-family: 'Roboto', sans-serif;
+
+// Lost Grid Config
 @lost flexbox flex;
 @lost gutter 20px;
 
+html,body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
 
 body {
-  background-color: #fefefe;
-  font-family: 'Roboto', sans-serif;
   font-size: responsive 16px 18px;
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'Roboto', sans-serif;
 }
 
-.container {
-  lost-center: 1280px;
+section {
+  background-color: rgba(#f00, .3);
 }
 
-h1 {
-  font-size: responsive 26px 48px;
-  lost-column: 1/1;
-  color: #6e6969;
-  font-weight: 400;
+.grid-container {
+  lost-center: 1140px;
+  background-color: rgba(#f00, .4);
 }
-
-// lost-column: 1/3;
-
-.photo-container {
-  lost-center: 1280px;
-  background-color: rgba(green, 0.3);
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-
-.photo__item {
-  border: 10px solid #000;
-  lost-column: 3/12;
-  background-color: rgba(#f00, 0.3);
-  // @media (max-width: 768px ){
-  //   width: 100%;
-  //   margin-bottom: 20px;
-  // }
-  // @media (max-width: 425px ){
-  //   lost-column: 1/1;
-  //   margin-bottom: 20px;
-  // }
-
-  // &__image {
-  //   border: 10px solid #000;
-  //   display: block;
-  //   // width: 100%;
-  //   object-fit: cover;
-  //   // object-position: center;
-  //   height: 300px;
-  //   border-radius: 20px;
-  // }
-
-  
-  
-}
-
-.photo__item__image {
-  border: 10px solid red;
-  display: block;
-  border-radius: 10px;
+.grid-item {
+  lost-column: 1/4;
+  // lost-waffle: 1/3;
+  background-color: rgba(#eee, 0.3);
+  padding: 10pr;
+  box-sizing: border-box;
+  margin-bottom: 20pr;
 }
