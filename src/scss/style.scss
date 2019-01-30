@@ -1,1 +1,64 @@
-@import '_one'
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+// font-family: 'Roboto', sans-serif;
+@lost flexbox flex;
+@lost gutter 20px;
+
+
+body {
+  background-color: #fefefe;
+  font-family: 'Roboto', sans-serif;
+  font-size: responsive 16px 18px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  lost-center: 1280px;
+}
+
+h1 {
+  font-size: responsive 26px 48px;
+  lost-column: 1/1;
+  color: #6e6969;
+  font-weight: 400;
+}
+
+// lost-column: 1/3;
+
+.photo-container {
+  lost-center: 1280px;
+  background-color: rgba(green, 0.3);
+}
+
+.photo__item {
+  border: 10px solid #000;
+  lost-column: 3/12;
+  background-color: rgba(#f00, 0.3);
+  // @media (max-width: 768px ){
+  //   width: 100%;
+  //   margin-bottom: 20px;
+  // }
+  // @media (max-width: 425px ){
+  //   lost-column: 1/1;
+  //   margin-bottom: 20px;
+  // }
+
+  // &__image {
+  //   border: 10px solid #000;
+  //   display: block;
+  //   // width: 100%;
+  //   object-fit: cover;
+  //   // object-position: center;
+  //   height: 300px;
+  //   border-radius: 20px;
+  // }
+
+  
+  
+}
+
+.photo__item__image {
+  border: 10px solid red;
+  display: block;
+  border-radius: 10px;
+}

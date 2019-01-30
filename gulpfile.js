@@ -16,6 +16,7 @@ var postcssNormalize = require('postcss-normalize');
 var zindex = require('postcss-zindex');
 
 var pug = require('gulp-pug');
+// var data = require('gulp-data');
 
 sass.compiler = require('node-sass');
 
@@ -73,12 +74,14 @@ gulp.task('styles', function() {
     .pipe(gulp.dest(paths.styles.dest));
 });
 
+
+
 gulp.task('templates', function() {
   return gulp.src(paths.templates.src)
-  .pipe(pug({
-    pretty: true
-  }))
-  .pipe(gulp.dest(paths.templates.dest));
+    .pipe(pug({
+      pretty: true
+    }))
+    .pipe(gulp.dest(paths.templates.dest));
 });
 
 gulp.watch(paths.styles.src, gulp.series('styles'));
