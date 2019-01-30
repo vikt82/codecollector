@@ -15,6 +15,8 @@ var pr = require('postcss-pr');
 var postcssNormalize = require('postcss-normalize');
 var zindex = require('postcss-zindex');
 
+var pug = require('gulp-pug');
+
 sass.compiler = require('node-sass');
 
 var paths = {
@@ -22,6 +24,10 @@ var paths = {
     src: ['src/scss/**/*.scss', 'src/scss/**/*.sass'],
     watch: ['src/scss/**/*.scss', 'src/scss/**/*.sass'],
     dest: 'dist/assets/css'
+  },
+  templates: {
+    src: 'src/templates/**/*.pug',
+    dest: 'dist/'
   }
   // scripts: {
   //   src: 'src/scripts/**/*.js',
@@ -67,6 +73,15 @@ gulp.task('styles', function() {
     .pipe(gulp.dest(paths.styles.dest));
 });
 
-gulp.watch(paths.styles.src, gulp.series('styles'));
+gulp.task('templates', function() {
+  return gulp.src(paths.templates.src)
+  .pipe(pug({
+    pretty: true
+  }))
+  .pipe(gulp.dest(paths.templates.dest));
+});
 
-gulp.task('dev', gulp.series('styles'));
+gulp.watch(paths.styles.src, gulp.series('styles'));
+gulp.watch(paths.templates.src, gulp.series('templates'));
+
+gulp.task('dev', gulp.series('styles', 'templates'));
