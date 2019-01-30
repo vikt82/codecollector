@@ -48,7 +48,10 @@ gulp.task('styles', function() {
         minPixelValue: 0
       }),
       pr(),
-      rucksack({fallbacks: true}),
+      rucksack({
+        fallbacks: true,
+        autoprefixer: false
+      }),
       lost(),
       // cssnext(),
       mqpacker(),

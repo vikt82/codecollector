@@ -1,10 +1,4 @@
-:root {
-  --bg: red;
-}
-
 body {
-  background-color: #f00;
-  background-color: var(--bg);
+  font-size: 100%;
+  display: flex;
 }
-
-@import '_one';
