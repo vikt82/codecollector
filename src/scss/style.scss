@@ -23,7 +23,7 @@ section {
 .navigation {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   border-bottom: 4px solid #f00;
   padding: 0;
 }
@@ -32,9 +32,15 @@ section {
   text-align: center;
   margin-bottom: 0 !important;
   transition: all 0.3s ease;
+  width: calc(100% / 4 - 20px);
+  background-color: #fff;
+  border: 1px solid #fff;
+  
   &:hover {
     background-color: #f1f1f1;
-    transform: scale(1.06)
+    border: 1px solid #f1f1f1;
+    transform: scale(1.07);
+    box-shadow: 0 25px 15px -20px rgba(#000, .7);
   }
 }
 
