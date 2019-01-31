@@ -12,17 +12,35 @@ html,body {
 }
 
 body {
-  font-size: responsive 16px 18px;
+  font-size: responsive 16px 20px;
   font-family: 'Roboto', sans-serif;
 }
 
 section {
-  background-color: rgba(#f00, .3);
+  // background-color: rgba(#f00, .2);
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 4px solid #f00;
+  padding: 0;
+}
+
+.item {
+  text-align: center;
+  margin-bottom: 0 !important;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.06)
+  }
 }
 
 .grid-container {
-  lost-center: 1140px 10pr;
-  background-color: rgba(#f00, .4);
+  lost-center: 1140px 4pr;
+  // background-color: rgba(#f00, .1);
 }
 ul {
   list-style: none;
@@ -32,7 +50,7 @@ ul {
 .grid-item {
   lost-column: 1/4;
   // lost-waffle: 1/3;
-  background-color: rgba(#eee, 0.3);
+  background-color: rgba(#eee, 0.1);
   padding: 10pr;
   box-sizing: border-box;
   margin-bottom: 20pr;
@@ -45,4 +63,17 @@ ul {
   @media (max-width: 465px){
     lost-column: 1/1;
   }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 200pr;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+  }
+  
 }
+
+
+@import '_one';

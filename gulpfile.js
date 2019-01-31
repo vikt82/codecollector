@@ -2,6 +2,8 @@
 
 var gulp = require('gulp');
 
+var browserSync = require('browser-sync').create();
+
 var sass = require('gulp-sass');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
@@ -40,6 +42,18 @@ var paths = {
   //   dest: 'assets/scripts/'
   // }
 };
+
+// Static Server + watching scss/html files
+gulp.task('serve', function() {
+
+  browserSync.init({
+      server: "./dist",
+      open: false
+  });
+
+  // gulp.watch("app/scss/*.scss", ['sass']);
+  gulp.watch("dist/**/*.*").on('change', browserSync.reload);
+});
 
 gulp.task('styles', function() {
   var plugins = [
@@ -99,4 +113,4 @@ gulp.task('templates', function() {
 gulp.watch(paths.styles.src, gulp.series('styles'));
 gulp.watch(paths.templates.src, gulp.series('templates'));
 
-gulp.task('dev', gulp.series('styles', 'templates'));
+gulp.task('dev', gulp.series('serve', 'styles', 'templates'));

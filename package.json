@@ -19,6 +19,7 @@
   "homepage": "https://github.com/vikt82/codecollector#readme",
   "devDependencies": {
     "autoprefixer": "^9.4.7",
+    "browser-sync": "^2.26.3",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.8",
     "gulp": "^4.0.0",

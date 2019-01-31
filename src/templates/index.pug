@@ -10,8 +10,17 @@ html(lang="en")
 
 
   section
+    .container
+      h1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque laudantium vero modi! Et modi dolores impedit officiis cumque, amet repellendus similique hic veritatis eum tenetur quis neque inventore repudiandae minima!
+    ul.grid-container.navigation
+      each item in menu
+        li.grid-item.item
+          h3 #{item.link} 
+          p #{item.src}
+  section
     ul.grid-container
       each val in posts
         li.grid-item
           h3 #{val.title} 
+          img(src=val.img, alt="")
           p #{val.body}
