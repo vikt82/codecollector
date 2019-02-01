@@ -1,4 +1,5 @@
-"use strict";
+export function sayHi() {
+    // "use strict";
 // GULP
 var gulp = require('gulp');
 // STATIC SERVER
@@ -138,3 +139,5 @@ gulp.watch(paths_dev.templates.src, gulp.series('templates:dev'));
 gulp.watch(paths_dev.assets.src, gulp.series('assets:dev'));
 
 gulp.task('dev', gulp.series('serve', ['assets:dev', 'styles:dev', 'templates:dev']));
+
+};
