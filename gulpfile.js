@@ -36,11 +36,11 @@ var paths = {
   templates: {
     src: 'src/templates/**/*.pug',
     dest: 'dist/'
+  },
+  assets: {
+    src: 'src/img/**/*.*',
+    dest: 'dist/assets/images/'
   }
-  // scripts: {
-  //   src: 'src/scripts/**/*.js',
-  //   dest: 'assets/scripts/'
-  // }
 };
 
 // Static Server + watching scss/html files
@@ -110,7 +110,16 @@ gulp.task('templates', function() {
     .pipe(gulp.dest(paths.templates.dest));
 });
 
+gulp.task('assets', function() {
+  return gulp.src(paths.assets.src)
+    .pipe(plumber('Fuck'))
+
+    
+    .pipe(gulp.dest(paths.assets.dest));
+});
+
 gulp.watch(paths.styles.src, gulp.series('styles'));
 gulp.watch(paths.templates.src, gulp.series('templates'));
+gulp.watch(paths.assets.src, gulp.series('assets'));
 
-gulp.task('dev', gulp.series('serve', 'styles', 'templates'));
+gulp.task('dev', gulp.series('serve', ['assets', 'styles', 'templates']));
