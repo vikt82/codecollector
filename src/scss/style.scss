@@ -35,6 +35,10 @@ section {
   width: calc(100% / 4 - 20px);
   background-color: #fff;
   border: 1px solid #fff;
+
+  @media (max-width: 768px) {
+    width: calc(100% / 2 - 20px);
+  }
   
   &:hover {
     background-color: #fff;

@@ -112,7 +112,7 @@ gulp.task('templates', function() {
 
 gulp.task('assets', function() {
   return gulp.src(paths.assets.src)
-    .pipe(plumber('Fuck'))
+    .pipe(plumber())
 
     
     .pipe(gulp.dest(paths.assets.dest));
