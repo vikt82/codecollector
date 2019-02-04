@@ -32,10 +32,6 @@ const pug = require('gulp-pug');
 const data = require('gulp-data');
 const fs = require('fs');
 
-
-
-
-
 // START:PATHS
 var libsPath = {
   libs: './node_modules/'
@@ -57,7 +53,7 @@ var pathsDev = {
 // END:PATHS
 
 // START:STYLE
-gulp.task('style:dev', function(){
+gulp.task('style:dev', function () {
   var plugins = [
     postcssNormalize({
       browserslist: "last 5 versions",
@@ -83,33 +79,39 @@ gulp.task('style:dev', function(){
       fallbacks: true,
       autoprefixer: false
     }),
-    autoprefixer({browsers: "last 5 versions"})
+    autoprefixer({
+      browsers: "last 5 versions"
+    })
     // cssnext(),
   ];
   return gulp.src(pathsDev.style.src)
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'expanded'}))
-    .pipe(postcss( plugins ))
+    .pipe(sass({
+      outputStyle: 'expanded'
+    }))
+    .pipe(postcss(plugins))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(pathsDev.style.dest));
 });
 // END:STYLE
 
 // START:PUG
-gulp.task('pug', function(){
+gulp.task('pug', function () {
   return gulp.src(pathsDev.templates.src)
     .pipe(plumber())
-    .pipe(data(function() {
+    .pipe(data(function () {
       return JSON.parse(fs.readFileSync('./src/templates/data/data.json'));
     }))
-    .pipe(pug({pretty: true}))
+    .pipe(pug({
+      pretty: true
+    }))
     .pipe(gulp.dest(pathsDev.templates.dest))
 });
 // END:PUG
 
 // START:ASSETS
-gulp.task('assets:dev', function(){
+gulp.task('assets:dev', function () {
   return gulp.src(pathsDev.assets.src)
     .pipe(plumber())
     .pipe(gulp.dest(pathsDev.assets.dest))
@@ -117,13 +119,11 @@ gulp.task('assets:dev', function(){
 // END:ASSETS
 
 // START:DEL
-gulp.task('clean', function(){
+gulp.task('clean', function () {
   return del('dest/');
 });
 // END:DEL
 
-
 gulp.task('dev', gulp.series(
-  'clean', 
-  gulp.parallel('style:dev', 'pug', 'assets:dev'))
-);
+  'clean',
+  gulp.parallel('style:dev', 'pug', 'assets:dev')));
