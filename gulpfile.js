@@ -124,6 +124,8 @@ gulp.task('clean', function () {
 });
 // END:DEL
 
+// START:GULP:TASK
 gulp.task('dev', gulp.series(
   'clean',
   gulp.parallel('style:dev', 'pug', 'assets:dev')));
+// END:GULP:TASK
