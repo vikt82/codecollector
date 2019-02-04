@@ -11,6 +11,8 @@ const sourcemaps = require('gulp-sourcemaps');
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 
+const stylus = require('gulp-stylus');
+
 // POSTCSS
 const postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
@@ -38,7 +40,7 @@ var libsPath = {
 }
 var pathsDev = {
   style: {
-    src: './src/scss/**/*.{scss,sass}',
+    src: './src/styl/style.styl',
     dest: './dest/assets/css/'
   },
   assets: {
@@ -87,9 +89,10 @@ gulp.task('style:dev', function () {
   return gulp.src(pathsDev.style.src)
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }))
+    // .pipe(sass({
+    //   outputStyle: 'expanded'
+    // }))
+    .pipe(stylus())
     .pipe(postcss(plugins))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(pathsDev.style.dest));
