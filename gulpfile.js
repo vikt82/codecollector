@@ -129,3 +129,5 @@ gulp.task('dev', gulp.series(
   'clean',
   gulp.parallel('style:dev', 'pug', 'assets:dev')));
 // END:GULP:TASK
+
+// watch browser sync build
