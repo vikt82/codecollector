@@ -78,7 +78,7 @@ gulp.task('style:dev', function(){
     lost(),
     mqpacker(),
     zindex(),
-    // cssnano(),
+    cssnano(),
     rucksack({
       fallbacks: true,
       autoprefixer: false
