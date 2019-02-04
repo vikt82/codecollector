@@ -1,12 +1,18 @@
 "use strict";
+
 // GULP
-var gulp = require('gulp');
-// STATIC SERVER
-var browserSync = require('browser-sync').create();
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+
+//SOURCEMAPS
+const sourcemaps = require('gulp-sourcemaps');
+
+// STYLE
+const sass = require('gulp-sass');
+sass.compiler = require('node-sass');
+
 // POSTCSS
-var sass = require('gulp-sass');
-var postcss = require('gulp-postcss');
-var sourcemaps = require('gulp-sourcemaps');
+const postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var cssnano = require('cssnano');
 var mqpacker = require("css-mqpacker");
@@ -17,124 +23,107 @@ var pxtorem = require('postcss-pxtorem');
 var pr = require('postcss-pr');
 var postcssNormalize = require('postcss-normalize');
 var zindex = require('postcss-zindex');
-//LINT
-var plumber = require('gulp-plumber');
-//PUG
-var fs = require('fs');
-var data = require('gulp-data');
-var pug = require('gulp-pug');
+
+// DELETE DEST
+const del = require('del');
+
+// PUG
+const pug = require('gulp-pug');
+const data = require('gulp-data');
+const fs = require('fs');
 
 
-sass.compiler = require('node-sass');
 
-// PATH'S
-var paths_dev = {
-  styles: {
-    src: ['src/scss/**/*.scss', 'src/scss/**/*.sass'],
-    watch: ['src/scss/**/*.scss', 'src/scss/**/*.sass'],
-    dest: 'dist/assets/css'
-  },
-  templates: {
-    src: 'src/templates/**/*.pug',
-    dest: 'dist/'
-  },
-  assets: {
-    src: 'src/img/**/*.*',
-    dest: 'dist/assets/images/'
-  }
-};
-var paths_build = {
-  styles: {
-    src: ['src/scss/**/*.scss', 'src/scss/**/*.sass'],
-    watch: ['src/scss/**/*.scss', 'src/scss/**/*.sass'],
-    dest: 'app/assets/css'
-  },
-  templates: {
-    src: 'app/templates/**/*.pug',
-    dest: 'dist/'
+
+
+// START:PATHS
+var libsPath = {
+  libs: './node_modules/'
+}
+var pathsDev = {
+  style: {
+    src: './src/scss/**/*.{scss,sass}',
+    dest: './dest/assets/css/'
   },
   assets: {
-    src: 'app/img/**/*.*',
-    dest: 'dist/assets/images/'
+    src: './src/img/**/*.{jpg,png,jpeg}',
+    dest: './dest/assets/image/'
+  },
+  templates: {
+    src: './src/templates/**/*.pug',
+    dest: './dest/'
   }
-};
+}
+// END:PATHS
 
-// Static Server + watching html files
-gulp.task('serve', function() {
-
-  browserSync.init({
-      server: "./dist",
-      open: false
-  });
-
-  // gulp.watch("app/scss/*.scss", ['sass']);
-  gulp.watch("dist/**/*.*").on('change', browserSync.reload);
-});
-
-// STYLES: sass, postcss
-gulp.task('styles:dev', function() {
+// START:STYLE
+gulp.task('style:dev', function(){
   var plugins = [
-      autoprefixer({browsers: "last 5 versions"}),
-      postcssNormalize({
-        browserslist: "last 5 versions",
-        allowDuplicates: false,
-        browsers: 'last 5 versions',
-        forceImport: true
-      }),
-      pxtorem({
-        rootValue: 16,
-        unitPrecision: 5,
-        propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
-        selectorBlackList: [],
-        replace: true,
-        mediaQuery: false,
-        minPixelValue: 0
-      }),
-      pr(),
-      rucksack({
-        fallbacks: true,
-        autoprefixer: false
-      }),
-      lost(),
-      // cssnext(),
-      mqpacker(),
-      zindex(),
-      // cssnano()
-    ];
-
-  return gulp.src(paths_dev.styles.src)
+    postcssNormalize({
+      browserslist: "last 5 versions",
+      allowDuplicates: false,
+      browsers: 'last 5 versions',
+      forceImport: true
+    }),
+    pxtorem({
+      rootValue: 16,
+      unitPrecision: 5,
+      propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
+      selectorBlackList: [],
+      replace: true,
+      mediaQuery: false,
+      minPixelValue: 0
+    }),
+    pr(),
+    lost(),
+    mqpacker(),
+    zindex(),
+    // cssnano(),
+    rucksack({
+      fallbacks: true,
+      autoprefixer: false
+    }),
+    autoprefixer({browsers: "last 5 versions"})
+    // cssnext(),
+  ];
+  return gulp.src(pathsDev.style.src)
     .pipe(plumber())
-    .pipe( sourcemaps.init() )
+    .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'expanded'}))
     .pipe(postcss( plugins ))
-    .pipe( sourcemaps.write('.') )
-    .pipe(gulp.dest(paths_dev.styles.dest));
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(pathsDev.style.dest));
 });
+// END:STYLE
 
-// TEMPLATES: pug
-gulp.task('templates:dev', function() {
-  return gulp.src(paths_dev.templates.src)
+// START:PUG
+gulp.task('pug', function(){
+  return gulp.src(pathsDev.templates.src)
     .pipe(plumber())
-
     .pipe(data(function() {
       return JSON.parse(fs.readFileSync('./src/templates/data/data.json'));
     }))
-    
-    .pipe(pug({
-      pretty: true
-    }))
-    .pipe(gulp.dest(paths_dev.templates.dest));
+    .pipe(pug({pretty: true}))
+    .pipe(gulp.dest(pathsDev.templates.dest))
 });
+// END:PUG
 
-// ASSETS
-gulp.task('assets:dev', function() {
-  return gulp.src(paths_dev.assets.src)
+// START:ASSETS
+gulp.task('assets:dev', function(){
+  return gulp.src(pathsDev.assets.src)
     .pipe(plumber())
-    .pipe(gulp.dest(paths_dev.assets.dest));
+    .pipe(gulp.dest(pathsDev.assets.dest))
 });
+// END:ASSETS
 
-gulp.watch(paths_dev.styles.src, gulp.series('styles:dev'));
-gulp.watch(paths_dev.templates.src, gulp.series('templates:dev'));
-gulp.watch(paths_dev.assets.src, gulp.series('assets:dev'));
+// START:DEL
+gulp.task('clean', function(){
+  return del('dest/');
+});
+// END:DEL
 
-gulp.task('dev', gulp.series('serve', ['assets:dev', 'styles:dev', 'templates:dev']));
+
+gulp.task('dev', gulp.series(
+  'clean', 
+  gulp.parallel('style:dev', 'pug', 'assets:dev'))
+);
