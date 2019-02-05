@@ -107,7 +107,7 @@ gulp.task('pug', function () {
       pretty: true
     }))
     .pipe(gulp.dest(pathsDev.templates.dest))
-});
+});``
 // END:PUG
 
 // START:ASSETS
@@ -124,10 +124,12 @@ gulp.task('clean', function () {
 });
 // END:DEL
 
+// START:WATCH
+  // task watch here
+// END:WATCH
+
 // START:GULP:TASK
 gulp.task('dev', gulp.series(
   'clean',
   gulp.parallel('style:dev', 'pug', 'assets:dev')));
 // END:GULP:TASK
-
-// watch browser sync build
