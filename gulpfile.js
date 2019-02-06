@@ -34,102 +34,103 @@ const fs = require('fs');
 
 // START:PATHS
 var libsPath = {
-  libs: './node_modules/'
+    libs: './node_modules/'
 }
 var pathsDev = {
-  style: {
-    src: './src/scss/**/*.{scss,sass}',
-    dest: './dest/assets/css/'
-  },
-  assets: {
-    src: './src/img/**/*.{jpg,png,jpeg}',
-    dest: './dest/assets/image/'
-  },
-  templates: {
-    src: './src/templates/**/*.pug',
-    dest: './dest/'
-  }
+    style: {
+        src: './src/scss/**/*.{scss,sass}',
+        dest: './dest/assets/css/'
+    },
+    assets: {
+        src: './src/img/**/*.{jpg,png,jpeg}',
+        dest: './dest/assets/image/'
+    },
+    templates: {
+        src: './src/templates/**/*.pug',
+        dest: './dest/'
+    }
 }
 // END:PATHS
 
 // START:STYLE
 gulp.task('style:dev', function () {
-  var plugins = [
-    postcssNormalize({
-      browserslist: "last 5 versions",
-      allowDuplicates: false,
-      browsers: 'last 5 versions',
-      forceImport: true
-    }),
-    pxtorem({
-      rootValue: 16,
-      unitPrecision: 5,
-      propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
-      selectorBlackList: [],
-      replace: true,
-      mediaQuery: false,
-      minPixelValue: 0
-    }),
-    pr(),
-    lost(),
-    mqpacker(),
-    zindex(),
-    cssnano(),
-    rucksack({
-      fallbacks: true,
-      autoprefixer: false
-    }),
-    autoprefixer({
-      browsers: "last 5 versions"
-    })
-    // cssnext(),
-  ];
-  return gulp.src(pathsDev.style.src)
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'expanded'
-    }))
-    .pipe(postcss(plugins))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(pathsDev.style.dest));
+    var plugins = [
+        postcssNormalize({
+            browserslist: "last 5 versions",
+            allowDuplicates: false,
+            browsers: 'last 5 versions',
+            forceImport: true
+        }),
+        pxtorem({
+            rootValue: 16,
+            unitPrecision: 5,
+            propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
+            selectorBlackList: [],
+            replace: true,
+            mediaQuery: false,
+            minPixelValue: 0
+        }),
+        pr(),
+        lost(),
+        mqpacker(),
+        zindex(),
+        cssnano(),
+        rucksack({
+            fallbacks: true,
+            autoprefixer: false
+        }),
+        autoprefixer({
+            browsers: "last 5 versions"
+        })
+        // cssnext(),
+    ];
+    return gulp.src(pathsDev.style.src)
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            outputStyle: 'expanded'
+        }))
+        .pipe(postcss(plugins))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(pathsDev.style.dest));
 });
 // END:STYLE
 
 // START:PUG
 gulp.task('pug', function () {
-  return gulp.src(pathsDev.templates.src)
-    .pipe(plumber())
-    .pipe(data(function () {
-      return JSON.parse(fs.readFileSync('./src/templates/data/data.json'));
-    }))
-    .pipe(pug({
-      pretty: true
-    }))
-    .pipe(gulp.dest(pathsDev.templates.dest))
-});``
+    return gulp.src(pathsDev.templates.src)
+        .pipe(plumber())
+        .pipe(data(function () {
+            return JSON.parse(fs.readFileSync('./src/templates/data/data.json'));
+        }))
+        .pipe(pug({
+            pretty: true
+        }))
+        .pipe(gulp.dest(pathsDev.templates.dest))
+});
+``
 // END:PUG
 
 // START:ASSETS
 gulp.task('assets:dev', function () {
-  return gulp.src(pathsDev.assets.src)
-    .pipe(plumber())
-    .pipe(gulp.dest(pathsDev.assets.dest))
+    return gulp.src(pathsDev.assets.src)
+        .pipe(plumber())
+        .pipe(gulp.dest(pathsDev.assets.dest))
 });
 // END:ASSETS
 
 // START:DEL
 gulp.task('clean', function () {
-  return del('dest/');
+    return del('dest/');
 });
 // END:DEL
 
 // START:WATCH
-  // task watch here
+// task watch here
 // END:WATCH
 
 // START:GULP:TASK
 gulp.task('dev', gulp.series(
-  'clean',
-  gulp.parallel('style:dev', 'pug', 'assets:dev')));
+    'clean',
+    gulp.parallel('style:dev', 'pug', 'assets:dev')));
 // END:GULP:TASK

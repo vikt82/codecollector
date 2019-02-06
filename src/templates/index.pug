@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Document
-    link(rel="stylesheet", href="assets/css/style.css")
-  body
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Document
+        link(href="assets/css/style.css", rel="stylesheet")
+    body
 
-    section
-      .img-container
-        img(src="assets/images/2.jpeg", alt="").section-img
-      .container
-        h1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque laudantium vero modi! Et modi dolores impedit officiis cumque, amet repellendus similique hic veritatis eum tenetur quis neque inventore repudiandae minima!
-      ul.grid-container.navigation
-        each item in menu
-          li.item
-            h3 #{item.link} 
-            p #{item.src}
-    section
-      ul.grid-container
-        each val in posts
-          li.grid-item
-            h3 #{val.title} 
-            img(src=val.img, alt="")
-            p #{val.body}
+        section
+            .img-container
+                img(src="assets/images/2.jpeg", alt="").section-img
+            .container
+                h1 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque laudantium vero modi! Et modi dolores impedit officiis cumque, amet repellendus similique hic veritatis eum tenetur quis neque inventore repudiandae minima!
+                ul.grid-container.navigation
+                    each item in menu
+                        li.item
+                            h3 #{item.link} 
+                            p #{item.src}
+        section
+            ul.grid-container
+                each val in posts
+                    li.grid-item
+                        h3 #{val.title} 
+                        img(src=val.img, alt="")
+                        p #{val.body}
